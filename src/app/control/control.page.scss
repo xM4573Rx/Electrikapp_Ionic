@@ -1,0 +1,35 @@
+ion-back-button {
+    --color: white;
+}
+
+ion-content {
+    --offset-top: 0px;
+    --offset-bottom: 0px;
+    // --background: #FFF; // #242A34;
+    --color: #000; // #FFF;
+    .container {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: 1% 0;
+        font-size: 6vw;
+        .header {
+            flex: 0;
+            text-align: center;
+            padding-top: 1%;
+            padding-right: 5%,
+        }
+        .body {
+            flex: 1.5;
+            text-align: center;
+        }
+        .footer {
+            display: flex;
+        }
+    }
+}
+
+ion-slides {
+    --bullet-background: grey; // #efefef;
+    --bullet-background-active: #8890B2; // #ffffff;
+}

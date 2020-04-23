@@ -1,5 +1,7 @@
 {
   "name": "ElectrikApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

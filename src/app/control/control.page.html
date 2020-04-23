@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Controlar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides class="ion-no-padding" style="height: 100%; margin-bottom: 30%;" [options]="{onlyExternal: true}">
+    <ion-slide style="overflow-y: scroll;">
+      <ion-grid class="container">
+        <ion-row class="header; ion-no-padding">
+          <ion-col class="ion-no-padding" style="text-align: right">
+            <ion-text>
+
+            </ion-text>
+          </ion-col>
+        </ion-row>
+
+        <!-- <ion-row class="body">
+          <ion-col style="text-align: center">
+            <ion-list class="ion-no-padding; body;">
+              <ion-item>
+                <ion-icon name="outlet" class="ion-no-margin" size="large" slot="start" (click)="openTimerPage()">
+                </ion-icon>
+                <ion-text class="ion-no-margin" style="font-size: 6vw">{{ TTimeOnOff }}</ion-text>
+                <ion-datetime readonly="true" class="ion-no-margin" [(ngModel)]="TimeOnOff"
+                  displayFormat="MMM DD, YYYY HH:mm" style="font-size: 6vw"></ion-datetime>
+                <ion-toggle [(ngModel)]="state" (ionChange)="change()" slot="end"></ion-toggle>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row> -->
+
+        <ion-row class="body">
+          <ion-col style="text-align: center">
+            <!-- <ion-list class="ion-no-padding; body;" mode='ios'> -->
+            <ion-list class="ion-no-padding; body;">
+              <ion-item *ngFor="let name of names">
+              <!-- <ion-item> -->
+                <ion-avatar slot="start">
+                  <ion-icon name="outlet" size="large" (click)="openTimerPage()"></ion-icon>
+                </ion-avatar>
+                <ion-label>
+                  <!-- <ion-text>
+                    {{ name.name }}
+                    OFF
+                  </ion-text> -->
+                  <ion-datetime readonly="true" class="ion-no-margin" [(ngModel)]="TimeOnOff"
+                  displayFormat="MMM DD, YYYY HH:mm" style="font-size: 6vw"></ion-datetime>
+                </ion-label>
+                <ion-toggle [(ngModel)]="state" (ionChange)="change()" slot="end"></ion-toggle>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="footer">
+
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openListPage()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Nuevo nodo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <div>
+      <div>
+
+      </div>
+    </div>
+    <div>
+      <ion-list class="ion-no-padding">
+        <ion-item>
+          <ion-input [(ngModel)]="valorNet" style="margin-top: 5%;">
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input [(ngModel)]="valorPass" style="margin-top: 5%;">
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input [(ngModel)]="valorName" placeholder="Nombre del nodo (ej: Nevera, TV)" style="margin-top: 5%;">
+          </ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="block" (click)="openHomePage()">
+        CREAR
+      </ion-button>
+    </div>
+    <div class="footer">
+    </div>
+  </div>
+</ion-content>

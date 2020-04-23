@@ -1,0 +1,25 @@
+ion-content {
+    --offset-top: 0px;
+    --offset-bottom: 0px;
+    // --background: #FFF;
+    --color: #000;
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        padding: 3% 0;
+        .header {
+            flex: 1;
+            justify-content: center;
+            text-align: center;
+        }
+        .body {
+            flex: 0.7;
+        }
+        .footer {
+            display: flex;
+        }
+    }
+}
