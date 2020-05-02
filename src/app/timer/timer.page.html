@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Programar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col class="ion-no-padding">
+        <ion-list class="ion-no-padding; ion-no-margin">
+          <ion-item style="font-size: 6vw;">
+            <ion-icon name="outlet" slot="start" size="large"></ion-icon>
+            <ion-text class="ion-no-margin" slot="end" style="font-size: 6vw;">
+              {{ Tcdevice }}
+            </ion-text>
+            <ion-toggle [(ngModel)]="state" (ionChange)="change()" slot="end"></ion-toggle>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-no-padding">
+        <ion-item class="ion-no-padding" style="font-size: 6vw;">
+          <ion-label class="ion-padding-start">OFF</ion-label>
+          <ion-datetime [(ngModel)]="offDate" displayFormat="MMM DD, YYYY HH:mm"></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-no-padding">
+        <ion-item class="ion-no-padding" style="font-size: 6vw;">
+          <ion-label class="ion-padding-start">ON</ion-label>
+          <ion-datetime [(ngModel)]="onDate" displayFormat="MMM DD, YYYY HH:mm"></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addItem(offDate, onDate)">
+      <ion-icon name="checkmark"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

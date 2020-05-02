@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import * as firebase from 'firebase';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-home',
@@ -9,11 +10,12 @@ import * as firebase from 'firebase';
 })
 export class HomePage implements OnInit {
 
-  users = 'users/+573016683176/';
+  // users = 'users/+573016683176/';
+  users: any;
   path = 'Groups/';
   path3 = 'StandBy/';
 
-  items = '';
+  items: any;
   Aenergy = '';
   onDate: any = '';
   offDate: any = '';
@@ -33,8 +35,19 @@ export class HomePage implements OnInit {
   refe2 = firebase.database().ref(this.users);
   refe3 = firebase.database().ref(this.path3);
 
-  constructor() {
-    this.refe.orderByKey().on('child_changed', snap => {
+  constructor(
+    private storage: Storage
+  ) {
+    this.storage.get('User').then((data) => {
+      if (data != null) {
+        this.users = data;
+        console.log(this.users);
+      }
+    });
+
+    // this.refe.child(this.users).child('All').child('Name').set(this.valorName);
+
+    /*this.refe.orderByKey().on('child_changed', snap => {
       snap.forEach(snap2 => {
         if (snap2.val() !== undefined) {
           this.names.push(snap2.val());
@@ -56,10 +69,14 @@ export class HomePage implements OnInit {
       this.onDate = snap.child('Device').val().On;
 
       this.progress = (parseFloat(this.Denergy) / parseFloat(this.Aenergy));
-    });
+    });*/
   }
 
   ngOnInit() {
+    this.refe.on('value', snap => {
+      // this.items = snap.child(this.users).child('All').val().Name;
+      this.items = snap.child(this.users).child('All').val().Energy;
+      console.log(this.items);
+    });
   }
-
 }

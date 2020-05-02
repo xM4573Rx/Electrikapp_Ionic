@@ -37,59 +37,14 @@ export class GroupsTwoPage implements OnInit {
       }
     });
 
-    this.storage.get('User').then((data) => {
-      this.refe2.on('value', snap => {
-        this.group = snap.child(data).child('Name').val();
-      });
-    });
-  }
-
-  ngOnInit() {
-    this.refe.once('value', snap => {
-      this.email = snap.child('Email').val();
-      this.name = snap.child('Name').val();
-      this.group = snap.child('Group').val();
-
-      if ((this.email != null) && (this.name != null) && (this.group != null)) {
-        this.storage.get('Email').then((data) => {
-          if (data != null) {
-            data = this.email;
-            this.storage.set('Email', data);
-          } else {
-            let variable: any;
-            variable = this.email;
-            this.storage.set('Email', variable);
-          }
-        });
-
-        this.storage.get('Name').then((data) => {
-          if (data != null) {
-            data = this.name;
-            this.storage.set('Name', data);
-          } else {
-            let variable: any;
-            variable = this.name;
-            this.storage.set('Name', variable);
-          }
-        });
-
-        this.storage.get('Group').then((data) => {
-          if (data != null) {
-            data = this.group;
-            this.storage.set('Group', data);
-          } else {
-            let variable: any;
-            variable = this.group;
-            this.storage.set('Group', variable);
-          }
-        });
-
-        this.refe.child('Name').remove();
-        this.refe.child('Email').remove();
-        this.refe.child('Group').remove();
+    this.storage.get('Group').then((data) => {
+      if (data != null) {
+        this.group = data;
       }
     });
   }
+
+  ngOnInit() { }
 
   openTabsPage() {
     this.router.navigate(['/tabs']);

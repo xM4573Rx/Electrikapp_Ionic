@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { NamePageRoutingModule } from './name-routing.module';
+import { TimerPageRoutingModule } from './timer-routing.module';
 
-import { NamePage } from './name.page';
+import { TimerPage } from './timer.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    NamePageRoutingModule
+    TimerPageRoutingModule
   ],
-  declarations: [NamePage]
+  declarations: [TimerPage]
 })
-export class NamePageModule {}
+export class TimerPageModule {}

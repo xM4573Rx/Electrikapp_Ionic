@@ -4,7 +4,7 @@
       <ion-back-button defaultHref="/">
       </ion-back-button>
     </ion-buttons>
-    <ion-title>Nuevo nodo</ion-title>
+    <ion-title>Crear nuevo grupo</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -18,19 +18,21 @@
     <div>
       <ion-list class="ion-no-padding">
         <ion-item>
-          <ion-input [(ngModel)]="valorNet" style="margin-top: 5%;">
+          <ion-label position="floating">Red</ion-label>
+          <ion-input [(ngModel)]="valorNet" readonly="true"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input [(ngModel)]="valorPass" type="password">
           </ion-input>
         </ion-item>
         <ion-item>
-          <ion-input [(ngModel)]="valorPass" style="margin-top: 5%;">
-          </ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input [(ngModel)]="valorName" placeholder="Nombre del nodo (ej: Nevera, TV)" style="margin-top: 5%;">
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input [(ngModel)]="valorName" autocapitalize="words" placeholder="Nombre del grupo (ej: Casa, Oficina)">
           </ion-input>
         </ion-item>
       </ion-list>
-      <ion-button expand="block" (click)="openHomePage()">
+      <ion-button expand="block" (click)="openGroupsTwoPage()">
         CREAR
       </ion-button>
     </div>

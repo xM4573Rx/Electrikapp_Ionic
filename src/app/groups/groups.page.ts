@@ -67,20 +67,12 @@ export class GroupsPage implements OnInit {
 
     this.storage.get('Group').then((data) => {
       if (data != null) {
-        this.router.navigate(['/groups-two']);
+        // this.router.navigate(['/groups-two']);
       }
     });
   }
 
   openNewPage() {
-    this.storage.get('Email').then((data) => {
-      this.refe.child('Email').set(data);
-    });
-
-    this.storage.get('Name').then((data) => {
-      this.refe.child('Name').set(data);
-    });
-
     this.router.navigate(['/new']);
   }
 }

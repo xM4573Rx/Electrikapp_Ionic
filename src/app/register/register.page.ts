@@ -42,7 +42,13 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
     this.afAuth.auth.onAuthStateChanged(user => {
       if (user) {
-        this.openGroupsPage();
+        this.storage.get('Group').then((data) => {
+          if (data != null) {
+            this.openHomePage();
+          } else {
+            this.openGroupsPage();
+          }
+        });
       } else {
         this.router.navigate(['/register']);
       }
@@ -51,6 +57,10 @@ export class RegisterPage implements OnInit {
 
   openGroupsPage() {
     this.router.navigate(['/groups']);
+  }
+
+  openHomePage() {
+    this.router.navigate(['/tabs/home']);
   }
 
   googleLogin() {
@@ -75,7 +85,7 @@ export class RegisterPage implements OnInit {
         this.email = suc.user.email;
         this.name = suc.user.displayName;
         this.refe.child('Email').set(this.email);
-        this.refe.child('Name').set(this.name);
+        this.refe.child('Name').set(this.name.replace(/\s/g, '_'));
         this.storage.remove('Email');
         this.storage.remove('Name');
         this.storage.remove('Group');
@@ -96,7 +106,7 @@ export class RegisterPage implements OnInit {
         this.email = suc.user.email;
         this.name = suc.user.displayName;
         this.refe.child('Email').set(this.email);
-        this.refe.child('Name').set(this.name);
+        this.refe.child('Name').set(this.name.replace(/\s/g, '_'));
         this.storage.remove('Email');
         this.storage.remove('Name');
         this.storage.remove('Group');

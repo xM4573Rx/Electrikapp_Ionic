@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ListPageRoutingModule } from './list-routing.module';
+import { CentralPageRoutingModule } from './central-routing.module';
 
-import { ListPage } from './list.page';
+import { CentralPage } from './central.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ListPageRoutingModule
+    CentralPageRoutingModule
   ],
-  declarations: [ListPage]
+  declarations: [CentralPage]
 })
-export class ListPageModule {}
+export class CentralPageModule {}

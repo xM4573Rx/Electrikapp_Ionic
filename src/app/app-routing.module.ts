@@ -32,12 +32,16 @@ const routes: Routes = [
     loadChildren: () => import('./control/control.module').then( m => m.ControlPageModule)
   },
   {
-    path: 'list',
-    loadChildren: () => import('./settings/device/list/list.module').then( m => m.ListPageModule)
+    path: 'timer',
+    loadChildren: () => import('./timer/timer.module').then( m => m.TimerPageModule)
   },
   {
-    path: 'name',
-    loadChildren: () => import('./settings/device/name/name.module').then( m => m.NamePageModule)
+    path: 'central',
+    loadChildren: () => import('./settings/central/central.module').then( m => m.CentralPageModule)
+  },
+  {
+    path: 'device',
+    loadChildren: () => import('./settings/device/device.module').then( m => m.DevicePageModule)
   }
 ];
 @NgModule({

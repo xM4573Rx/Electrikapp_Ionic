@@ -4,29 +4,12 @@
       <ion-back-button defaultHref="/">
       </ion-back-button>
     </ion-buttons>
-    <ion-title>Crea un nuevo grupo</ion-title>
+    <ion-title>Nuevo</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div>
-    <div>
-      <div>
-
-      </div>
-    </div>
-    <div>
-      <ion-list class="ion-no-padding">
-        <ion-item>
-          <ion-input [(ngModel)]="valor" autocapitalize="words" placeholder="Nombre del grupo (ej: Casa, Oficina)" style="margin-top: 5%;">
-          </ion-input>
-        </ion-item>
-      </ion-list>
-      <ion-button expand="block" (click)="openGroupsTwoPage()">
-        CREAR
-      </ion-button>
-    </div>
-    <div class="footer">
-    </div>
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <img src="../../assets/images/name_sin_fondo.png">
   </div>
 </ion-content>

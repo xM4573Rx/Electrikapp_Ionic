@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
+import { interval } from 'rxjs';
+import { LoadingController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
-import * as firebase from 'firebase';
+declare var WifiWizard2: any;
 
 @Component({
   selector: 'app-new',
@@ -11,135 +13,89 @@ import * as firebase from 'firebase';
 })
 export class NewPage implements OnInit {
 
-  path = 'StandBy/';
-  path2 = 'Groups/';
-
-  valor: string;
-  user: any = {};
-  email: any;
-  name: any;
-  group: any;
-  concat: any;
-
-  refe = firebase.database().ref(this.path);
-  refe2 = firebase.database().ref(this.path2);
+  results = [];
+  data = [];
+  valorNet: string;
+  sub: any;
 
   constructor(
+    private router: Router,
     private storage: Storage,
-    private router: Router
+    private loadingCtrl: LoadingController
   ) { }
 
   ngOnInit() {
-    this.refe.once('value', snap => {
-      this.email = snap.child('Email').val();
-      this.name = snap.child('Name').val();
+    this.getNetName();
 
-      if ((this.email != null) && (this.name != null)) {
-        this.storage.get('Email').then((data) => {
-          if (data != null) {
-            data = this.email;
-            this.storage.set('Email', data);
-          } else {
-            let variable: any;
-            variable = this.email;
-            this.storage.set('Email', variable);
-          }
-        });
-
-        this.storage.get('Name').then((data) => {
-          if (data != null) {
-            data = this.name;
-            this.storage.set('Name', data);
-          } else {
-            let variable: any;
-            variable = this.name;
-            this.storage.set('Name', variable);
-          }
-        });
-
-        this.refe.child('Name').remove();
-        this.refe.child('Email').remove();
-      }
+    this.sub = interval(10000)
+    .subscribe((val) => {
+      console.log('called');
+      this.getSSID();
     });
   }
 
-  openGroupsTwoPage() {
-    this.storage.get('Email').then((data) => {
-      this.refe.child('Email').set(data);
-    });
+  async getSSID() {
+    try {
+      const results = await WifiWizard2.scan();
+      this.results = results;
+    } catch (error) {
+      console.log(error);
+    }
 
-    this.storage.get('Name').then((data) => {
-      this.refe.child('Name').set(data);
-    });
+    for (const x of this.results) {
+      this.data.push(x.SSID);
+    }
 
-    this.storage.get('Group').then((data) => {
-      if (data != null) {
-        data = this.valor;
-        this.storage.set('Group', data);
-      } else {
-        let variable: any;
-        variable = this.valor;
-        this.storage.set('Group', variable);
-      }
-    });
-
-    this.refe.child('Group').set(this.valor);
-
-    this.refe.once('value', snap => {
-      this.email = snap.child('Email').val();
-      this.name = snap.child('Name').val();
-      this.group = snap.child('Group').val();
-
-      if ((this.email != null) && (this.name != null) && (this.group != null)) {
-        this.storage.get('Email').then((data) => {
-          if (data != null) {
-            data = this.email;
-            this.storage.set('Email', data);
-          } else {
-            let variable: any;
-            variable = this.email;
-            this.storage.set('Email', variable);
-          }
-        });
-
-        this.storage.get('Name').then((data) => {
-          if (data != null) {
-            data = this.name;
-            this.storage.set('Name', data);
-          } else {
-            let variable: any;
-            variable = this.name;
-            this.storage.set('Name', variable);
-          }
-        });
-
-        this.storage.get('Group').then((data) => {
-          if (data != null) {
-            data = this.valor;
-            this.storage.set('Group', data);
-          } else {
-            let variable: any;
-            variable = this.valor;
-            this.storage.set('Group', variable);
-          }
-        });
-
-        this.concat = this.group + '_' + this.name;
-        this.refe2.child(this.concat).child('Name').set(this.valor);
-
-        this.storage.get('User').then((data) => {
-          if (data != null) {
-            data = this.concat;
-            this.storage.set('User', data);
-          } else {
-            let variable: any;
-            variable = this.concat;
-            this.storage.set('User', variable);
-          }
+    for (const i of this.data) {
+      if (i === 'ElectrikAppPunto') {
+        console.log('OK PUNTO');
+        this.sub.unsubscribe();
+        this.connectToNet('ElectrikAppPunto')
+        .finally(() => {
+          this.router.navigate(['/device']);
         });
       }
-    });
 
-    this.router.navigate(['/groups-two']);
+      if (i === 'ElectrikAppCentral') {
+        console.log('OK CENTRAL');
+        this.sub.unsubscribe();
+        this.connectToNet('ElectrikAppCentral')
+        .finally(() => {
+          this.router.navigate(['/central']);
+        });
+      }
+    }
+  }
+
+  async connectToNet(net: string) {
+    try {
+      const loading = await this.loadingCtrl.create();
+      await loading.present();
+      const state = await WifiWizard2.connect(net, true, '12345678', 'WPA', false);
+      console.log(state);
+      loading.dismiss();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getNetName() {
+    try {
+      const state = await WifiWizard2.getConnectedSSID();
+      this.valorNet = state;
+
+      this.storage.get('Net').then((data) => {
+        if (data != null) {
+          data = this.valorNet;
+          this.storage.set('Net', data);
+        } else {
+          let variable: any;
+          variable = this.valorNet;
+          this.storage.set('Net', variable);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
