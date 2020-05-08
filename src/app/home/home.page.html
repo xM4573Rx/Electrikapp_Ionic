@@ -56,16 +56,16 @@
         <ion-row class="body">
           <ion-col style="text-align: center">
             <ion-list class="ion-no-padding; body;" mode='ios'>
-              <ion-item *ngFor="let name of names">
+              <ion-item *ngFor="let name of names" lines="none">
               <!-- <ion-item> -->
                 <ion-avatar slot="start">
-                  <ion-icon name="outlet" size="large"></ion-icon>
+                  <ion-icon name="pause-circle" size="large"></ion-icon>
                 </ion-avatar>
                 <ion-label>
                   <ion-text>
-                    {{ name.name }}
+                    {{ name.Name }}
                   </ion-text>
-                  <ion-progress-bar value="{{ name.value }}"></ion-progress-bar>
+                  <ion-progress-bar value="{{ name.Energy }}"></ion-progress-bar>
                 </ion-label>
               </ion-item>
             </ion-list>

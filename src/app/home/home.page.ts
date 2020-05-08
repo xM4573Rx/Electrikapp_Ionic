@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 
 import * as firebase from 'firebase';
 import { Storage } from '@ionic/storage';
+import { HTTP } from '@ionic-native/http/ngx';
+import { LoadingController } from '@ionic/angular';
+import { from } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -36,7 +40,10 @@ export class HomePage implements OnInit {
   refe3 = firebase.database().ref(this.path3);
 
   constructor(
-    private storage: Storage
+    private storage: Storage,
+    private zone: NgZone,
+    private nativeHttp: HTTP,
+    private loadingCtrl: LoadingController
   ) {
     this.storage.get('User').then((data) => {
       if (data != null) {
@@ -44,6 +51,20 @@ export class HomePage implements OnInit {
         console.log(this.users);
       }
     });
+
+    // const query = this.refe.orderByKey();
+    // query.once('value', snapshot => {
+    //   snapshot.child(this.users).child('Devices').forEach(childSnapshot => {
+    //     this.names.push(childSnapshot.val());
+    //     console.log(this.names);
+    //   });
+    // });
+
+    // const query = this.refe;
+    // query.on('value', snap => {
+    //   this.names.push(snap.child(this.users).child('Devices').val());
+    //   console.log(this.names);
+    // });
 
     // this.refe.child(this.users).child('All').child('Name').set(this.valorName);
 
@@ -77,6 +98,16 @@ export class HomePage implements OnInit {
       // this.items = snap.child(this.users).child('All').val().Name;
       this.items = snap.child(this.users).child('All').val().Energy;
       console.log(this.items);
+    });
+
+    this.refe.orderByKey().on('value', snapshot => {
+      this.names = [];
+      snapshot.child(this.users).child('Devices').forEach(childSnapshot => {
+        this.zone.run(() => {
+          this.names.push(childSnapshot.val());
+          console.log(this.names);
+        });
+      });
     });
   }
 }

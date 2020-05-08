@@ -31,10 +31,10 @@ export class ControlPage implements OnInit {
     private router: Router,
     private storage: Storage
   ) {
-    this.refe.orderByKey().on('child_added', snap => {
+    this.refe.child('Casa_jorge_lopez').orderByKey().on('child_added', snap => {
       snap.forEach(snap2 => {
         if (snap2.val() !== undefined) {
-          this.names.push(snap2.val());
+          this.names.push(snap2.val().Name);
           console.log(this.names);
         }
       });

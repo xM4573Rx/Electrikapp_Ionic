@@ -38,11 +38,11 @@
               <ion-item *ngFor="let name of names">
               <!-- <ion-item> -->
                 <ion-avatar slot="start">
-                  <ion-icon name="outlet" size="large" (click)="openTimerPage()"></ion-icon>
+                  <ion-icon name="pause-circle" size="large" (click)="openTimerPage()"></ion-icon>
                 </ion-avatar>
                 <ion-label>
                   <!-- <ion-text>
-                    {{ name.name }}
+                    {{ name.Name }}
                     OFF
                   </ion-text> -->
                   <ion-datetime readonly="true" class="ion-no-margin" [(ngModel)]="TimeOnOff"
