@@ -13,7 +13,6 @@ ion-content {
             flex: 0;
             text-align: center;
             padding-top: 1%;
-            padding-right: 5%,
         }
         .body {
             flex: 1.5;
@@ -28,4 +27,8 @@ ion-content {
 ion-slides {
     --bullet-background: grey; // #efefef;
     --bullet-background-active: #8890B2; // #ffffff;
+}
+
+.list-md {
+    padding: 0%;
 }

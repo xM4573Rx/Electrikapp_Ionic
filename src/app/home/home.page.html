@@ -1,10 +1,11 @@
 <ion-header>
   <ion-toolbar class="ion-no-border; ion-no-margin; ion-no-padding">
-    <ion-buttons slot="primary">
-      <ion-button>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="presentPopover($event)">
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>ElectrickApp</ion-title>
+    <ion-title>Electrickapp</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,15 +14,21 @@
     <ion-slide style="overflow-y: scroll;">
       <ion-grid class="container">
         <ion-row class="header">
-          <ion-col style="text-align: right">
-            <ion-text>
-
-            </ion-text>
+          <ion-col>
+            <div style="margin-top: 4%; font-size: 5vw; text-align: left; padding-left: 5%;">
+              {{ allEnergyText }}
+            </div>
+          </ion-col>
+          <ion-col>
+            <div style="margin-top: 4%; font-size: 5vw; text-align: right; padding-right: 5%;">
+              {{ allPowerText }}
+            </div>
           </ion-col>
         </ion-row>
 
         <ion-row class="header; ion-no-padding;" style="font-size: 9vw;">
-          <ion-col>
+          <!-- <ion-col style="padding-top: 20%;"> -->
+          <ion-col style="padding-top: 30%;">
             <circle-progress 
               [percent] = '100'
               [maxPercent] = '100'
@@ -33,12 +40,13 @@
               [outerStrokeColor] = "'#97C34A'"
               [innerStrokeColor] = "'#E7E8EA'"
               [innerStrokeWidth] = '10'
-              [title] = "'Working'"
+              [title] = "pay"
               [titleFontSize] = '30'
-              [subtitle] = "'Correct'"
+              [subtitle] = "'Pesos'"
               [subtitleFontSize] = '20'
               [animateTitle] = 'false'
               [renderOnClick] = 'false'
+              [startFromZero] = 'false'
               [responsive] = 'false'>
             </circle-progress>
             <!-- <div>
@@ -47,17 +55,16 @@
             <div>
               Costo total
             </div> -->
-            <div style="margin-top: 5%; font-size: 6vw; text-align: left; padding-left: 5%;">
+            <!-- <div style="margin-top: 5%; font-size: 6vw; text-align: left; padding-left: 5%;">
               Detalle
-            </div>
+            </div> -->
           </ion-col>
         </ion-row>
 
         <ion-row class="body">
-          <ion-col style="text-align: center">
-            <ion-list class="ion-no-padding; body;" mode='ios'>
+          <!-- <ion-col style="text-align: center">
+            <ion-list class="ion-no-padding; body;">
               <ion-item *ngFor="let name of names" lines="none">
-              <!-- <ion-item> -->
                 <ion-avatar slot="start">
                   <ion-icon name="pause-circle" size="large"></ion-icon>
                 </ion-avatar>
@@ -69,7 +76,7 @@
                 </ion-label>
               </ion-item>
             </ion-list>
-          </ion-col>
+          </ion-col> -->
         </ion-row>
 
         <ion-row class="footer">

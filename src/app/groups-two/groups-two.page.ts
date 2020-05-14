@@ -47,6 +47,7 @@ export class GroupsTwoPage implements OnInit {
   ngOnInit() { }
 
   openTabsPage() {
-    this.router.navigate(['/tabs']);
+    // this.router.navigate(['/tabs']);
+    this.router.navigate(['/home']);
   }
 }

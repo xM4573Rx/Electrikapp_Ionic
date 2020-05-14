@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { HttpClientModule } from '@angular/common/http';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
@@ -11,6 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
+import { DatePicker } from '@ionic-native/date-picker/ngx';
 
 import { environment } from '../environments/environment';
 
@@ -33,6 +33,7 @@ import { AppComponent } from './app.component';
     StatusBar,
     SplashScreen,
     HTTP,
+    DatePicker,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

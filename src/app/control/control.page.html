@@ -33,14 +33,16 @@
 
         <ion-row class="body">
           <ion-col style="text-align: center">
-            <!-- <ion-list class="ion-no-padding; body;" mode='ios'> -->
             <ion-list class="ion-no-padding; body;">
-              <ion-item *ngFor="let name of names">
-              <!-- <ion-item> -->
+              <ion-item *ngFor="let name of names" lines="none">
                 <ion-avatar slot="start">
                   <ion-icon name="pause-circle" size="large" (click)="openTimerPage()"></ion-icon>
                 </ion-avatar>
                 <ion-label>
+                  <!-- <ion-text>
+                    {{ name.Name }}
+                  </ion-text>
+                  <ion-progress-bar value="{{ name.Energy }}"></ion-progress-bar> -->
                   <!-- <ion-text>
                     {{ name.Name }}
                     OFF
@@ -61,7 +63,7 @@
     </ion-slide>
   </ion-slides>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="openListPage()">
+    <ion-fab-button (click)="openNewPage()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

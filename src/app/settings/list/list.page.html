@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Ajustes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item (click)="openCostPage()">
+      Valor del kWh
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Fecha de corte</ion-label>
+      <ion-datetime
+      cancelText="CANCELAR"
+      doneText="ACEPTAR"
+      monthShortNames="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
+      max="2025"
+      min="2015"
+      [(ngModel)]="fecha"
+      (ngModelChange)="openDatePage($event)"
+      ></ion-datetime>
+    </ion-item>
+  </ion-list>
+</ion-content>

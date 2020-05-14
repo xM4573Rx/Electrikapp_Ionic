@@ -2,10 +2,8 @@ import { Component, OnInit, NgZone } from '@angular/core';
 
 import * as firebase from 'firebase';
 import { Storage } from '@ionic/storage';
-import { HTTP } from '@ionic-native/http/ngx';
-import { LoadingController } from '@ionic/angular';
-import { from } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { PopoverController } from '@ionic/angular';
+import { HomePopoverComponent } from '../home-popover/home-popover.component';
 
 @Component({
   selector: 'app-home',
@@ -20,10 +18,14 @@ export class HomePage implements OnInit {
   path3 = 'StandBy/';
 
   items: any;
-  Aenergy = '';
+  costKwh: any;
+  pay: any;
+  allEnergy: any;
+  allEnergyText: any;
+  allPower: any;
+  allPowerText: any;
   onDate: any = '';
   offDate: any = '';
-  Apower = '';
   Denergy = '';
   Cenergy = 0.0;
   Cdevice = 0.0;
@@ -42,13 +44,17 @@ export class HomePage implements OnInit {
   constructor(
     private storage: Storage,
     private zone: NgZone,
-    private nativeHttp: HTTP,
-    private loadingCtrl: LoadingController
+    private popoverController: PopoverController
   ) {
     this.storage.get('User').then((data) => {
       if (data != null) {
         this.users = data;
-        console.log(this.users);
+      }
+    });
+
+    this.storage.get('Cost').then((data) => {
+      if (data != null) {
+        this.costKwh = data.Cost;
       }
     });
 
@@ -96,18 +102,34 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.refe.on('value', snap => {
       // this.items = snap.child(this.users).child('All').val().Name;
-      this.items = snap.child(this.users).child('All').val().Energy;
-      console.log(this.items);
+      this.allEnergy = snap.child(this.users).child('All').val().Energy.toFixed(2);
+      this.allPower = snap.child(this.users).child('All').val().Power.toFixed(2);
+
+      this.allEnergyText = this.allEnergy.toString() + ' kWh';
+      this.allPowerText = this.allPower.toString() + ' kW';
+
+      console.log(parseFloat(this.costKwh) * parseFloat(this.allEnergy));
+      this.pay = (parseFloat(this.costKwh) * parseFloat(this.allEnergy)).toFixed(0);
     });
 
     this.refe.orderByKey().on('value', snapshot => {
       this.names = [];
       snapshot.child(this.users).child('Devices').forEach(childSnapshot => {
         this.zone.run(() => {
-          this.names.push(childSnapshot.val());
-          console.log(this.names);
+          if (childSnapshot.val() !== undefined) {
+            this.names.push(childSnapshot.val());
+          }
         });
       });
     });
+  }
+
+  async presentPopover(event) {
+    const popover = await this.popoverController.create({
+      component: HomePopoverComponent,
+      event: (event),
+      translucent: true
+    });
+    return await popover.present();
   }
 }

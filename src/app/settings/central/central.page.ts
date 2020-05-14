@@ -26,7 +26,7 @@ export class CentralPage implements OnInit {
   concat: any;
   data: any;
 
-  refe2 = firebase.database().ref(this.path);
+  refe = firebase.database().ref(this.path);
 
   constructor(
     private loadingCtrl: LoadingController,
@@ -120,9 +120,9 @@ export class CentralPage implements OnInit {
 
     this.sendNodeData()
     .finally(() => {
-      this.refe2.child(this.concat).child('All').child('Name').set(this.valorName);
-      this.refe2.child(this.concat).child('All').child('Energy').set('0');
-      this.refe2.child(this.concat).child('All').child('Power').set('0');
+      this.refe.child(this.concat).child('All').child('Name').set(this.valorName);
+      this.refe.child(this.concat).child('All').child('Energy').set(0);
+      this.refe.child(this.concat).child('All').child('Power').set(0);
       this.router.navigate(['/groups-two']);
     });
   }

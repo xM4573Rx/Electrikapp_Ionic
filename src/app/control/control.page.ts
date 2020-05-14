@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Storage } from '@ionic/storage';
+import { Component, OnInit, NgZone } from '@angular/core';
 
 import * as firebase from 'firebase';
+import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-control',
@@ -11,10 +11,11 @@ import * as firebase from 'firebase';
 })
 export class ControlPage implements OnInit {
 
-  path = 'Groups';
+  path = 'Groups/';
   path2 = 'StandBy/';
   path3 = 'users/+573016683176/';
 
+  users: any;
   onDate: any = '';
   offDate: any = '';
   TimeOnOff: any = '';
@@ -29,9 +30,17 @@ export class ControlPage implements OnInit {
 
   constructor(
     private router: Router,
-    private storage: Storage
+    private storage: Storage,
+    private zone: NgZone
   ) {
-    this.refe.child('Casa_jorge_lopez').orderByKey().on('child_added', snap => {
+    this.storage.get('User').then((data) => {
+      if (data != null) {
+        this.users = data;
+        console.log(this.users);
+      }
+    });
+
+    /*this.refe.child('Casa_jorge_lopez').orderByKey().on('child_added', snap => {
       snap.forEach(snap2 => {
         if (snap2.val() !== undefined) {
           this.names.push(snap2.val().Name);
@@ -52,22 +61,28 @@ export class ControlPage implements OnInit {
         this.TimeOnOff = this.onDate;
         this.TTimeOnOff = 'On';
       }
-    });
+    });*/
   }
 
   ngOnInit() {
+    this.refe.orderByKey().on('value', snapshot => {
+      this.names = [];
+      snapshot.child(this.users).child('Devices').forEach(childSnapshot => {
+        this.zone.run(() => {
+          if (childSnapshot.val() !== undefined) {
+            this.names.push(childSnapshot.val());
+          }
+        });
+      });
+    });
   }
 
   openTimerPage() {
     this.router.navigate(['/timer']);
   }
 
-  openListPage() {
-    this.storage.get('User').then((data) => {
-      this.refe2.child('Concat').set(data);
-    });
-
-    this.router.navigate(['/list']);
+  openNewPage() {
+    this.router.navigate(['/new']);
   }
 
   change() {

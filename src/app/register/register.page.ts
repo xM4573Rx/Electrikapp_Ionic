@@ -60,7 +60,8 @@ export class RegisterPage implements OnInit {
   }
 
   openHomePage() {
-    this.router.navigate(['/tabs/home']);
+    // this.router.navigate(['/tabs/home']);
+    this.router.navigate(['/home']);
   }
 
   googleLogin() {

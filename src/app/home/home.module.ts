@@ -9,6 +9,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 
 import { HomePage } from './home.page';
+import { HomePopoverComponent } from '../home-popover/home-popover.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { HomePage } from './home.page';
     NgCircleProgressModule.forRoot(),
     HomePageRoutingModule
   ],
-  declarations: [HomePage]
+  entryComponents: [HomePopoverComponent],
+  declarations: [HomePage, HomePopoverComponent]
 })
 export class HomePageModule {}

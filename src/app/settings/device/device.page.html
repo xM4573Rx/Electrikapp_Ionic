@@ -1,9 +1,43 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>device</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Crea nuevo punto</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div>
+    <div>
+      <div>
 
+      </div>
+    </div>
+    <div>
+      <ion-list class="ion-no-padding">
+        <ion-item>
+          <ion-label position="floating">Red</ion-label>
+          <ion-input [(ngModel)]="valorNet" readonly="true"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input [(ngModel)]="valorPass" type="password">
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input [(ngModel)]="valorName" autocapitalize="words" placeholder="Nombre del grupo (ej: Tv, Nevera)">
+          </ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="block" (click)="openHomePage()">
+        CREAR
+      </ion-button>
+    </div>
+    <div class="footer">
+      <!-- <a>Electrikapp</a> -->
+    </div>
+  </div>
 </ion-content>

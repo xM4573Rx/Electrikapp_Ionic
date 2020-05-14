@@ -42,6 +42,18 @@ const routes: Routes = [
   {
     path: 'device',
     loadChildren: () => import('./settings/device/device.module').then( m => m.DevicePageModule)
+  },
+  {
+    path: 'cost',
+    loadChildren: () => import('./settings/cost/cost.module').then( m => m.CostPageModule)
+  },
+  {
+    path: 'list',
+    loadChildren: () => import('./settings/list/list.module').then( m => m.ListPageModule)
+  },
+  {
+    path: 'date',
+    loadChildren: () => import('./settings/date/date.module').then( m => m.DatePageModule)
   }
 ];
 @NgModule({
