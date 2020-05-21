@@ -21,7 +21,8 @@
           </ion-col>
           <ion-col>
             <div style="margin-top: 4%; font-size: 5vw; text-align: right; padding-right: 5%;">
-              {{ allPowerText }}
+              <!-- {{ allPowerText }} -->
+              $ {{ pay }}
             </div>
           </ion-col>
         </ion-row>
@@ -30,7 +31,7 @@
           <!-- <ion-col style="padding-top: 20%;"> -->
           <ion-col style="padding-top: 30%;">
             <circle-progress 
-              [percent] = '100'
+              [percent] = "progress"
               [maxPercent] = '100'
               [showTitle] = 'true'
               [showSubtitle] = 'true'
@@ -40,7 +41,7 @@
               [outerStrokeColor] = "'#97C34A'"
               [innerStrokeColor] = "'#E7E8EA'"
               [innerStrokeWidth] = '10'
-              [title] = "pay"
+              [title] = "projection"
               [titleFontSize] = '30'
               [subtitle] = "'Pesos'"
               [subtitleFontSize] = '20'

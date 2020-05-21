@@ -16,6 +16,7 @@ export class ListPage implements OnInit {
   costo: any;
   users: any;
   fecha: any;
+  proyeccion: any;
 
   refe = firebase.database().ref(this.path);
 
@@ -38,6 +39,41 @@ export class ListPage implements OnInit {
     this.refe.child(this.users).child('Settings').child('Date').set(event);
   }
 
+  async openProjectionPage() {
+    await this.alertController.create({
+      header: 'Ingrese la proyección',
+      inputs: [
+        {
+          type: 'number',
+          name: 'Projection'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Aceptar',
+          handler: (res) => {
+            this.proyeccion = res.Projection;
+            console.log(res.Projection);
+            this.storage.get('Projection').then((data) => {
+              if (data != null) {
+                data = this.proyeccion;
+                this.storage.set('Projection', data);
+              } else {
+                let variable: any;
+                variable = this.proyeccion;
+                this.storage.set('Projection', variable);
+              }
+            });
+            this.refe.child(this.users).child('Settings').child('Projection').set(this.proyeccion);
+          }
+        }
+      ]
+    }).then(res => res.present());
+  }
+
   async openCostPage() {
     await this.alertController.create({
       header: 'Ingrese el valor',
@@ -54,7 +90,8 @@ export class ListPage implements OnInit {
         {
           text: 'Aceptar',
           handler: (res) => {
-            this.costo = res;
+            console.log(res.Cost);
+            this.costo = res.Cost;
             this.storage.get('Cost').then((data) => {
               if (data != null) {
                 data = this.costo;
@@ -65,7 +102,7 @@ export class ListPage implements OnInit {
                 this.storage.set('Cost', variable);
               }
             });
-            this.refe.child(this.users).child('Settings').set(this.costo);
+            this.refe.child(this.users).child('Settings').child('Cost').set(this.costo);
           }
         }
       ]

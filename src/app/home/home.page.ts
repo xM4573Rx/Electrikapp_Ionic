@@ -24,6 +24,7 @@ export class HomePage implements OnInit {
   allEnergyText: any;
   allPower: any;
   allPowerText: any;
+  projection: any;
   onDate: any = '';
   offDate: any = '';
   Denergy = '';
@@ -101,15 +102,21 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.refe.on('value', snap => {
+      this.zone.run(() => {
+        this.allEnergy = snap.child(this.users).child('All').val().Energy.toFixed(2);
+        this.allPower = snap.child(this.users).child('All').val().Power.toFixed(2);
+        this.costKwh = snap.child(this.users).child('Settings').val().Cost;
+        this.projection = snap.child(this.users).child('Settings').val().Projection;
+
+        this.allEnergyText = this.allEnergy.toString() + ' kWh';
+        this.allPowerText = this.allPower.toString() + ' kW';
+
+        console.log(parseFloat(this.costKwh) * parseFloat(this.allEnergy));
+        this.pay = (parseFloat(this.costKwh) * parseFloat(this.allEnergy)).toFixed(0);
+
+        this.progress = (parseFloat(this.pay) / parseFloat(this.projection)) * 100;
+      });
       // this.items = snap.child(this.users).child('All').val().Name;
-      this.allEnergy = snap.child(this.users).child('All').val().Energy.toFixed(2);
-      this.allPower = snap.child(this.users).child('All').val().Power.toFixed(2);
-
-      this.allEnergyText = this.allEnergy.toString() + ' kWh';
-      this.allPowerText = this.allPower.toString() + ' kW';
-
-      console.log(parseFloat(this.costKwh) * parseFloat(this.allEnergy));
-      this.pay = (parseFloat(this.costKwh) * parseFloat(this.allEnergy)).toFixed(0);
     });
 
     this.refe.orderByKey().on('value', snapshot => {

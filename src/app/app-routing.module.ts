@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'register', pathMatch: 'full' },
+  // { path: '', redirectTo: 'register', pathMatch: 'full' },
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
@@ -44,16 +44,12 @@ const routes: Routes = [
     loadChildren: () => import('./settings/device/device.module').then( m => m.DevicePageModule)
   },
   {
-    path: 'cost',
-    loadChildren: () => import('./settings/cost/cost.module').then( m => m.CostPageModule)
-  },
-  {
     path: 'list',
     loadChildren: () => import('./settings/list/list.module').then( m => m.ListPageModule)
   },
   {
-    path: 'date',
-    loadChildren: () => import('./settings/date/date.module').then( m => m.DatePageModule)
+    path: 'graph',
+    loadChildren: () => import('./graph/graph.module').then( m => m.GraphPageModule)
   }
 ];
 @NgModule({

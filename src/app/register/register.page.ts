@@ -40,19 +40,19 @@ export class RegisterPage implements OnInit {
   }
 
   ngOnInit() {
-    this.afAuth.auth.onAuthStateChanged(user => {
-      if (user) {
-        this.storage.get('Group').then((data) => {
-          if (data != null) {
-            this.openHomePage();
-          } else {
-            this.openGroupsPage();
-          }
-        });
-      } else {
-        this.router.navigate(['/register']);
-      }
-    });
+    // this.afAuth.auth.onAuthStateChanged(user => {
+    //   if (user) {
+    //     this.storage.get('Group').then((data) => {
+    //       if (data != null) {
+    //         this.openHomePage();
+    //       } else {
+    //         this.openGroupsPage();
+    //       }
+    //     });
+    //   } else {
+    //     this.router.navigate(['/register']);
+    //   }
+    // });
   }
 
   openGroupsPage() {

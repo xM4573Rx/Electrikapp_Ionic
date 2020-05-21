@@ -16,6 +16,10 @@ const routes: Routes = [
         loadChildren: () => import('../control/control.module').then(m => m.ControlPageModule)
       },
       {
+        path: 'graph',
+        loadChildren: () => import('../graph/graph.module').then(m => m.GraphPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'

@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DatePageRoutingModule } from './date-routing.module';
+import { GraphPageRoutingModule } from './graph-routing.module';
 
-import { DatePage } from './date.page';
+import { GraphPage } from './graph.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DatePageRoutingModule
+    GraphPageRoutingModule
   ],
-  declarations: [DatePage]
+  declarations: [GraphPage]
 })
-export class DatePageModule {}
+export class GraphPageModule {}

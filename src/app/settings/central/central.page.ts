@@ -120,9 +120,19 @@ export class CentralPage implements OnInit {
 
     this.sendNodeData()
     .finally(() => {
-      this.refe.child(this.concat).child('All').child('Name').set(this.valorName);
-      this.refe.child(this.concat).child('All').child('Energy').set(0);
-      this.refe.child(this.concat).child('All').child('Power').set(0);
+      // this.refe.child(this.concat).child('All').child('Name').set(this.valorName);
+      // this.refe.child(this.concat).child('All').child('Energy').set(0);
+      // this.refe.child(this.concat).child('All').child('Power').set(0);
+      this.refe.child(this.concat).child('All').set({
+        Name: this.valorName,
+        Energy: 0,
+        Power: 0
+      });
+      this.refe.child(this.concat).child('Settings').set({
+        Date: 0,
+        Cost: 0,
+        Projection: 0
+      });
       this.router.navigate(['/groups-two']);
     });
   }
